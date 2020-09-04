@@ -9,7 +9,6 @@ namespace AngularProjectAPI.Models
 {
     public class ArticleStatus
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ArticleStatusID { get; set; }
         public string Name { get; set; }
 

@@ -9,7 +9,6 @@ namespace AngularProjectAPI.Models
 {
     public class Tag
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TagID { get; set; }
         public string Name { get; set; }
 

@@ -9,7 +9,6 @@ namespace AngularProjectAPI.Models
 {
     public class Role
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int RoleID { get; set; }
         public string Name { get; set; }
 
