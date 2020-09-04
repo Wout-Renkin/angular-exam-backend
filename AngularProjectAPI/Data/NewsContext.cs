@@ -18,12 +18,19 @@ namespace AngularProjectAPI.Data
 
         public DbSet<Role> Roles { get; set; }
 
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<ArticleStatus> ArticleStatuses { get; set; }
+
         public DbSet<Article> Articles { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Role>().ToTable("Role");
+            modelBuilder.Entity<Tag>().ToTable("Tag");
+            modelBuilder.Entity<ArticleStatus>().ToTable("ArticleStatus");
             modelBuilder.Entity<Article>().ToTable("Article");
             
         }
