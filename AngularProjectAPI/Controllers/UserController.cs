@@ -29,7 +29,7 @@ namespace AngularProjectAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var userID = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
+            var username = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
             return await _context.Users.ToListAsync();
         }
 
