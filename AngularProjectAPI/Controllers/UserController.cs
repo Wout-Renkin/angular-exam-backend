@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using AngularProjectAPI.Data;
 using AngularProjectAPI.Models;
 using AngularProjectAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AngularProjectAPI.Controllers
 {
@@ -21,6 +23,14 @@ namespace AngularProjectAPI.Controllers
         {
             _userService = userService;
             _context = context;
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        {
+            var userID = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
+            return await _context.Users.ToListAsync();
         }
 
         [HttpPost]
