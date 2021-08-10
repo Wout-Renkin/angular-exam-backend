@@ -23,14 +23,9 @@ namespace AngularProjectAPI.Controllers
             _context = context;
         }
 
-        //Get all users from group
-        //GET: api/GroupUser/{groupId}
         [Authorize]
         [HttpGet("{groupId}/{companyId}")]
-        //   [FromQuery] int pageSize = 10, int currentPage = 1, int companyId = 0, string filter = null, int? roleId = null
         public async Task<ActionResult<IEnumerable<GroupUser>>> GetUsersByGroup(int groupId, int companyId, [FromQuery] int pageSize = 10, int currentPage = 1, string filter = null, Boolean requestedModerator = false, Boolean notInGroup = false, Boolean moderator = false, Boolean groupRequest = false)
-        //var count = await users.CountAsync();
-        //return Ok(new { users = await users.Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync(), totalUsers = count
         {
             IQueryable<GroupUser> users;
 
@@ -38,11 +33,7 @@ namespace AngularProjectAPI.Controllers
             {
                 IQueryable<User> companyUsers;
                 IQueryable<User> groupUsers;
-                IQueryable<User> noGroupUsers;
-               /* IEnumerable<User> companyUsers;
-                IEnumerable<User> groupUsers;*/
-/*                companyUsers = _context.Users.Where(c => c.CompanyId == companyId).AsEnumerable();
-                groupUsers = _context.GroupUsers.Where(c => c.GroupId == groupId).Select(u => u.User).AsEnumerable();*/
+
                 companyUsers = _context.Users.Where(c => c.CompanyId == companyId);
                 groupUsers = _context.GroupUsers.Where(c => c.GroupId == groupId).Select(u => u.User);
                 companyUsers = companyUsers.Except(groupUsers);
@@ -55,9 +46,6 @@ namespace AngularProjectAPI.Controllers
 
                 }
                
-                   
-                //  users = users.GroupBy(x => x.UserId).Select(y => y.FirstOrDefault());
-                // users.SelectMany(x => x.User.OrderBy(x => x.userId).Skip(1));
                 var noGroupCount = companyUsers.Count();
 
                 return Ok(new { users = await companyUsers.Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync(), totalUsers = noGroupCount });
@@ -75,27 +63,6 @@ namespace AngularProjectAPI.Controllers
                     users = _context.GroupUsers
                        .Where(g => g.GroupId == groupId)
                        .Where(c => c.CompanyId == companyId).Where(m => m.Moderator == moderator).Where(g => g.GroupRequest == groupRequest);
-                    /*    if(groupRequest)
-                        {
-                            users = _context.GroupUsers
-                               .Where(g => g.GroupId == groupId)
-                               .Where(c => c.CompanyId == companyId).Where(m => m.Moderator == moderator).Where(g => g.GroupRequest == true);
-                        } else
-                        {
-                            users = _context.GroupUsers
-                               .Where(g => g.GroupId == groupId)
-                               .Where(c => c.CompanyId == companyId).Where(m => m.Moderator == moderator);
-                        }*/
-
-                    /* if (moderator)
-                     {
-
-                     } els
-                     {
-                         users = _context.GroupUsers
-                             .Where(g => g.GroupId == groupId)
-                             .Where(c => c.CompanyId == companyId).Where(m => m.Moderator == false);
-                     }*/
                 }
             }
 
@@ -113,8 +80,6 @@ namespace AngularProjectAPI.Controllers
             return Ok(new { users = await users.Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync(), totalUsers = count });
              }
 
-        //Create a post
-        //POST: api/post
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Post>> PostGroupUser(GroupUser groupUser)
@@ -137,8 +102,6 @@ namespace AngularProjectAPI.Controllers
 
         }
 
-        //Get a specific post
-        //GET: api/post/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<GroupUser>> GetGroupUser(int id)
         {
@@ -162,6 +125,7 @@ namespace AngularProjectAPI.Controllers
             return groupUser;
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUserGroup(int id, GroupUser groupUser)
         {

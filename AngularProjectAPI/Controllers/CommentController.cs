@@ -23,8 +23,6 @@ namespace AngularProjectAPI.Controllers
             _context = context;
         }
 
-        //Get a specific post
-        //GET: api/post/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Comment>> GetComment(int id)
         {
@@ -38,8 +36,6 @@ namespace AngularProjectAPI.Controllers
             return comment;
         }
 
-        //Create a group
-        //POST: api/group
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Comment>> PostComment(Comment comment)
@@ -50,8 +46,6 @@ namespace AngularProjectAPI.Controllers
             return CreatedAtAction("GetComment", new { id = comment.CommentId }, comment);
         }
 
-        //Delete a comment
-        //DELETE: api/comment/{id}
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Comment>> DeleteComment(int id)
@@ -68,8 +62,6 @@ namespace AngularProjectAPI.Controllers
             return comment;
         }
 
-        //Update a comment
-        //PUT: api/comment/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutComment(int id, Comment comment)
         {
@@ -99,8 +91,6 @@ namespace AngularProjectAPI.Controllers
             return NoContent();
         }
 
-        //Get all likes from a post
-        //GET: api/like/post/{postId}
         [HttpGet("post/{postId}")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsByPost(int postId)
         {

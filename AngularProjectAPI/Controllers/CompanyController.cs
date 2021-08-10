@@ -25,8 +25,6 @@ namespace AngularProjectAPI.Controllers
             _context = context;
         }
 
-        //Get a specific company
-        //GET: api/company/{id}
         [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(int id)
@@ -41,8 +39,6 @@ namespace AngularProjectAPI.Controllers
             return company;
         }
 
-        //Delete a company
-        //DELETE: api/company/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult<Company>> DeleteCompany(int id)
         {
@@ -58,18 +54,6 @@ namespace AngularProjectAPI.Controllers
             return company;
         }
 
-        //Create a company
-        //POST: api/company
-        /* [HttpPost]
-         public async Task<ActionResult<Company>> PostCompany(Company company)
-         {
-
-             _context.Companies.Add(company);
-             await _context.SaveChangesAsync();
-
-             return CreatedAtAction("GetCompany", new { id = company.CompanyId }, company);
-         }
- */
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Company>> PostCompany([FromForm] Company company)
@@ -96,14 +80,8 @@ namespace AngularProjectAPI.Controllers
             {
                 return BadRequest();
             }
-
-
-            
-
         }
 
-        //Update a company
-        //PUT: api/company/{id}
         [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCompany(int id, [FromForm] Company company)

@@ -50,7 +50,6 @@ namespace AngularProjectAPI.Controllers
 
         // PUT: api/group/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGroup(int id,[FromForm]Group group)
@@ -84,8 +83,6 @@ namespace AngularProjectAPI.Controllers
                 }
             }
 
-
-
             _context.Entry(group).State = EntityState.Modified;
 
             try
@@ -105,30 +102,7 @@ namespace AngularProjectAPI.Controllers
             }
 
             return Ok(group);
-            /*  if (id != group.GroupId)
-              {
-                  return BadRequest();
-              }
-
-              _context.Entry(group).State = EntityState.Modified;
-
-              try
-              {
-                  await _context.SaveChangesAsync();
-              }
-              catch (DbUpdateConcurrencyException)
-              {
-                  if (!GroupExists(id))
-                  {
-                      return NotFound();
-                  }
-                  else
-                  {
-                      throw;
-                  }
-              }
-
-              return NoContent();*/
+          
         }
 
         private bool GroupExists(int id)
@@ -203,13 +177,6 @@ namespace AngularProjectAPI.Controllers
                 return Forbid();
             }
 
-    
-
-
-            /*            _context.Groups.Add(group);
-                        await _context.SaveChangesAsync();
-
-                        return CreatedAtAction("GetGroup", new { id = group.GroupId }, group);*/
         }
 
 

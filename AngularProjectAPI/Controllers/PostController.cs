@@ -50,8 +50,7 @@ namespace AngularProjectAPI.Controllers
         [HttpGet("group/{groupId}")]
         public async Task<ActionResult<IEnumerable<Post>>> GetPostsByGroup(int groupId, [FromQuery] int pageSize = 10, int currentPage = 1)
         {
-            /*            await _context.Posts.Include(u => u.User).Include(u => u.Likes).ThenInclude(u => u.User).Include(u => u.Comments).ThenInclude(u => u.User).Where(g => g.Group.GroupId == groupId).OrderByDescending(x => x.PostId).Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync();
-            */
+           
             return await _context.Posts
                 .Include(u => u.User)
                 .Include(u => u.Likes)
