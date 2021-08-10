@@ -25,9 +25,9 @@ namespace AngularProjectAPI.Services
             _newsContext = newsContext;
         }
 
-        public User Authenticate(string username, string password)
+        public User Authenticate(string email, string password)
         {
-            var user = _newsContext.Users.Include(r=>r.Role).SingleOrDefault(x => x.Username == username && x.Password == password);
+            var user = _newsContext.Users.Include(r=>r.Role).SingleOrDefault(x => x.Email == email && x.Password == password);
 
             // return null if user not found
             if (user == null)
@@ -42,9 +42,8 @@ namespace AngularProjectAPI.Services
                 {
                     new Claim("UserID", user.UserID.ToString()),
                     new Claim("Email", user.Email),
-                    new Claim("Username", user.Username),
-                    new Claim("RoleID", user.RoleID.ToString()),
-                    new Claim("Role", user.Role.Name)
+                    new Claim("RoleId", user.RoleId.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role.Name),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -52,6 +51,7 @@ namespace AngularProjectAPI.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
 
+            user = _newsContext.Users.Include(c => c.Company).SingleOrDefault(u => u.UserID == user.UserID);
             // remove password before returning
             user.Password = null;
 

@@ -18,21 +18,30 @@ namespace AngularProjectAPI.Data
 
         public DbSet<Role> Roles { get; set; }
 
-        public DbSet<Tag> Tags { get; set; }
-
-        public DbSet<ArticleStatus> ArticleStatuses { get; set; }
-
-        public DbSet<Article> Articles { get; set; }
+        public DbSet<Group> Groups { get; set; }
         
+        public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<GroupUser> GroupUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Role>().ToTable("Role");
-            modelBuilder.Entity<Tag>().ToTable("Tag");
-            modelBuilder.Entity<ArticleStatus>().ToTable("ArticleStatus");
-            modelBuilder.Entity<Article>().ToTable("Article");
-            
+            modelBuilder.Entity<Post>().ToTable("Post");
+            modelBuilder.Entity<Group>().ToTable("Group");
+            modelBuilder.Entity<Company>().ToTable("Company");
+            modelBuilder.Entity<Comment>().ToTable("Comment");
+            modelBuilder.Entity<Like>().ToTable("Like");
+            modelBuilder.Entity<GroupUser>().ToTable("GroupUser");
+
         }
     }
 }
