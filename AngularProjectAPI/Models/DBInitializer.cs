@@ -33,8 +33,8 @@ namespace AngularProjectAPI.Models
                 new User { FirstName = "Gregory", LastName = "Gregoirs", Email = "Gregory@hotmail.com", Password = "secret", RoleId = 1 },
                 new User { FirstName = "Senna", LastName = "Sennas", Email = "Senna@hotmail.com", Password = "secret", RoleId = 1 },
                 new User { FirstName = "Kristof", LastName = "Kristoffus", Email = "Kristof@hotmail.com", Password = "secret", RoleId = 1 },
-                new User { FirstName = "Senne", LastName = "", Email = "Senne@hotmail.com", Password = "secret", RoleId = 1 },
-                new User { FirstName = "Kenny", LastName = "Sennekes", Email = "Kenny@hotmail.com", Password = "secret", RoleId = 1 },
+                new User { FirstName = "Senne", LastName = "Sennekes", Email = "Senne@hotmail.com", Password = "secret", RoleId = 1 },
+                new User { FirstName = "Kenny", LastName = "Kenji", Email = "Kenny@hotmail.com", Password = "secret", RoleId = 1 },
                 new User { FirstName = "Morgan", LastName = "Freeman", Email = "Morgan@hotmail.com", Password = "secret", RoleId = 1 }
                 );
             context.SaveChanges();

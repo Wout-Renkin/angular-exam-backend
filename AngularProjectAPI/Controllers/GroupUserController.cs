@@ -42,7 +42,7 @@ namespace AngularProjectAPI.Controllers
                 if (filter != null && filter != "null")
                 {
 
-                    companyUsers.Where(u => u.Email.Contains(filter) || u.FirstName.Contains(filter) || u.LastName.Contains(filter));
+                    companyUsers = companyUsers.Where(u => u.Email.Contains(filter) || u.FirstName.Contains(filter) || u.LastName.Contains(filter));
 
                 }
                
